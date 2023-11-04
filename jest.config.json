@@ -1,0 +1,17 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "collectCoverageFrom": [
+    "src/components/**/*.{ts,tsx}",
+    "src/lib/**/*.{ts,tsx}",
+    "!**/node_modules/**"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  }
+}
