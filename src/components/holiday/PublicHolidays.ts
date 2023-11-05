@@ -1,3 +1,5 @@
+import { CertainDayPublicHoliday } from './CertainDayPublicHoliday';
+import { FixedDayPublicHoliday } from './FixedDayPublicHoliday';
 import { HolidayType } from './HolidayType';
 
 /**
@@ -6,14 +8,33 @@ import { HolidayType } from './HolidayType';
 export class PublicHolidays {
   private holidays: HolidayType[] = [];
 
-  // Getter for holidays
+  // Getter for holidays.
   getPublicHolidays(): HolidayType[] {
     return this.holidays;
   }
 
   // Push public holidays of different types to the list of holidays.
-  addPublicHoliday(type: HolidayType): void {
-    this.holidays.push(type);
+  pushPublicHolidays(holidayList: Array<object>): void {
+    holidayList.map((holiday: any) => {
+      switch (holiday.type) {
+        case 'FixedDay':
+          this.holidays.push(
+            new FixedDayPublicHoliday(holiday.month, holiday.date)
+          );
+
+          break;
+        case 'CertainDay':
+          this.holidays.push(
+            new CertainDayPublicHoliday(
+              holiday.month,
+              holiday.day,
+              holiday.week
+            )
+          );
+
+          break;
+      }
+    });
   }
 
   // Check if the passed in date is of a valid HolidayType.

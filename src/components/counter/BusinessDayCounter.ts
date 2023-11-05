@@ -1,3 +1,8 @@
+import fs from 'fs';
+import path from 'path';
+
+import appRootPath from 'app-root-path';
+
 import { PublicHolidays } from '../holiday/PublicHolidays';
 
 export default class BusinessDayCounter {
@@ -110,7 +115,7 @@ export default class BusinessDayCounter {
    * @param {Date} secondDate End Date (Exclusive)
    * @returns {Number} Number of weekdays
    */
-  businessDaysBetweenTwoDatesWithHolidayInput(
+  businessDaysBetweenTwoDatesUsingDS(
     firstDate: Date,
     secondDate: Date
   ): number {
@@ -133,7 +138,18 @@ export default class BusinessDayCounter {
       Math.floor(timeDifference / millisecondsPerDay) - 1; // Subtract 1 to exclude the firstDate in the count.
 
     let businessDays = 0;
+
+    // Read the holiday data from the JSON file for now. This data can be fetched from an API in the future.
+    const holidayData = JSON.parse(
+      fs.readFileSync(
+        path.join(appRootPath.toString(), 'resources', 'holiday-data.json'),
+        'utf-8'
+      )
+    );
+
     const publicHolidays = new PublicHolidays();
+    publicHolidays.pushPublicHolidays(holidayData);
+    console.log('publicHolidays:::::::', publicHolidays.getPublicHolidays());
 
     // TODO: Change implementation a bit
     // Use a loop to iterate through the days and check for weekends and holidays
