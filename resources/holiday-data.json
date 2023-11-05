@@ -1,0 +1,53 @@
+[
+  {
+    "type": "FixedDay",
+    "name": "New Year's Day",
+    "month": 1,
+    "date": 1
+  },
+  {
+    "type": "FixedDay",
+    "name": "Australia Day",
+    "month": 1,
+    "date": 26
+  },
+  {
+    "type": "FixedDay",
+    "name": "Anzac Day",
+    "month": 4,
+    "date": 25
+  },
+  {
+    "type": "FixedDay",
+    "name": "Christmas Day",
+    "month": 12,
+    "date": 25
+  },
+  {
+    "type": "FixedDay",
+    "name": "Boxing Day",
+    "month": 12,
+    "date": 26
+  },
+  {
+    "type": "CertainDay",
+    "name": "King's Birthday",
+    "month": 6,
+    "day": 1,
+    "week": 2
+  },
+  {
+    "type": "CertainDay",
+    "name": "Bank Holiday",
+    "month": 8,
+    "day": 1,
+    "week": 1
+  },
+  {
+    "type": "CertainDay",
+    "name": "Labour Day",
+    "month": 10,
+    "day": 1,
+    "week": 1
+  }
+]
