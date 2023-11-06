@@ -39,49 +39,36 @@ export default class BusinessDayCounter {
       const remainingDays = totalInclusiveDays % 7;
 
       // For each scenario, calculate the number of weekends and excluded days.
-      if (completeWeeks > 0) {
-        weekends = 2 * completeWeeks;
+      weekends = completeWeeks ? 2 * completeWeeks : 0;
 
-        if (remainingDays === 0) {
-          if (firstDay === 6 || secondDay === 0) {
-            excludedDays = 1;
-          } else if (firstDay === 0 || secondDay === 6) {
-            excludedDays = 0;
-          } else {
-            excludedDays = 2;
-          }
-        } else {
-          if (firstDay === secondDay && isWeekendDay(firstDay)) {
-            weekends += 1;
-            excludedDays = 0;
-          } else if (firstDay === 6 && secondDay === 0) {
-            weekends += 2;
-            excludedDays = 0;
-          } else if (
-            (firstDay === 6 && !isWeekendDay(secondDay)) ||
-            (secondDay === 0 && !isWeekendDay(firstDay))
-          ) {
-            weekends += 2;
-            excludedDays = 1;
-          } else if (
-            (firstDay === 0 && !isWeekendDay(secondDay)) ||
-            (secondDay === 6 && !isWeekendDay(firstDay))
-          ) {
-            weekends += 1;
-            excludedDays = 1;
-          } else if (!isWeekendDay(firstDay) && !isWeekendDay(secondDay)) {
-            excludedDays = 2;
-          }
-        }
-      } else {
+      if (remainingDays === 0) {
         if (firstDay === 6 || secondDay === 0) {
-          weekends = 2;
           excludedDays = 1;
         } else if (firstDay === 0 || secondDay === 6) {
-          weekends = 1;
-          excludedDays = 1;
+          excludedDays = 0;
         } else {
-          weekends = 0;
+          excludedDays = 2;
+        }
+      } else {
+        if (firstDay === secondDay && isWeekendDay(firstDay)) {
+          weekends += 1;
+          excludedDays = 0;
+        } else if (firstDay === 6 && secondDay === 0) {
+          weekends += 2;
+          excludedDays = 0;
+        } else if (
+          (firstDay === 6 && !isWeekendDay(secondDay)) ||
+          (secondDay === 0 && !isWeekendDay(firstDay))
+        ) {
+          weekends += 2;
+          excludedDays = 1;
+        } else if (
+          (firstDay === 0 && !isWeekendDay(secondDay)) ||
+          (secondDay === 6 && !isWeekendDay(firstDay))
+        ) {
+          weekends += 1;
+          excludedDays = 1;
+        } else if (!isWeekendDay(firstDay) && !isWeekendDay(secondDay)) {
           excludedDays = 2;
         }
       }
