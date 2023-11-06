@@ -6,7 +6,7 @@
  */
 const isWeekend = (date: Date): boolean => {
   const day = date.getDay();
-  return day === 0 || day === 6;
+  return isWeekendDay(day);
 };
 
 /**
@@ -19,4 +19,25 @@ const isWeekendDay = (day: number): boolean => {
   return day === 0 || day === 6;
 };
 
-export { isWeekend, isWeekendDay };
+/**
+ * Helper function to get number of days in date range.
+ *
+ * @param {Date} firstDate Start Date
+ * @param {Date} secondDate End Date
+ * @param {Boolean} inclusive Whether to include the start and end dates
+ * @returns {Number} Number of days
+ */
+const getDaysBetweenDateRange = (
+  firstDate: Date,
+  secondDate: Date,
+  inclusive: boolean
+): number => {
+  const timeDifference = secondDate.getTime() - firstDate.getTime();
+  const millisecondsPerDay = 1000 * 60 * 60 * 24;
+  const totalDays = Math.floor(timeDifference / millisecondsPerDay);
+  const numberOfDays = inclusive ? totalDays + 1 : totalDays - 1;
+
+  return numberOfDays;
+};
+
+export { isWeekend, isWeekendDay, getDaysBetweenDateRange };

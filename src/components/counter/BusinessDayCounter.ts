@@ -1,5 +1,9 @@
 import PublicHolidays from '../holiday/PublicHolidays';
-import { isWeekend, isWeekendDay } from '../../utils/date';
+import {
+  getDaysBetweenDateRange,
+  isWeekend,
+  isWeekendDay
+} from '../../utils/date';
 import { getHolidayData } from '../../utils/holiday';
 import {
   DatesBusinessDayCounterError,
@@ -22,10 +26,12 @@ export default class BusinessDayCounter {
         excludedDays = 0;
 
       // Rather than looping over days between the two dates (higher time complexity), calculate the total number of days between the two dates and subtract the number of weekends.
-      const timeDifference = secondDate.getTime() - firstDate.getTime();
-      const millisecondsPerDay = 1000 * 60 * 60 * 24;
-      const totalInclusiveDays =
-        Math.floor(timeDifference / millisecondsPerDay) + 1;
+      // Calculate the total number of days between startDate and endDate (exclusive).
+      const totalInclusiveDays = getDaysBetweenDateRange(
+        firstDate,
+        secondDate,
+        true
+      );
 
       // If secondDate is equal to or before firstDate or if there are no days between the two dates, return 0.
       if (secondDate <= firstDate || totalInclusiveDays <= 2) {
@@ -101,10 +107,11 @@ export default class BusinessDayCounter {
       }
 
       // Calculate the total number of days between startDate and endDate (exclusive).
-      const timeDifference = secondDate.getTime() - firstDate.getTime();
-      const millisecondsPerDay = 1000 * 60 * 60 * 24;
-      const totalExclusiveDays =
-        Math.floor(timeDifference / millisecondsPerDay) - 1; // Subtract 1 to exclude the firstDate in the count.
+      const totalExclusiveDays = getDaysBetweenDateRange(
+        firstDate,
+        secondDate,
+        false
+      );
 
       // Create a Set of holiday dates for faster lookup.
       const holidaySet = new Set(
@@ -156,10 +163,11 @@ export default class BusinessDayCounter {
       publicHolidays.pushPublicHolidays(holidayData);
 
       // Calculate the total number of days between startDate and endDate (exclusive).
-      const timeDifference = secondDate.getTime() - firstDate.getTime();
-      const millisecondsPerDay = 1000 * 60 * 60 * 24;
-      const totalExclusiveDays =
-        Math.floor(timeDifference / millisecondsPerDay) - 1;
+      const totalExclusiveDays = getDaysBetweenDateRange(
+        firstDate,
+        secondDate,
+        false
+      );
 
       let businessDays = 0;
 
