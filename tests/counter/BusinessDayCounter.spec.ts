@@ -15,10 +15,31 @@ describe('BusinessDayCounter', () => {
         },
         {
           firstDate: new Date('2013-10-07'),
+          secondDate: new Date('2013-10-08')
+        },
+        {
+          firstDate: new Date('2013-10-07'),
           secondDate: new Date('2014-01-01')
+        },
+        {
+          firstDate: new Date('2023-11-05'),
+          secondDate: new Date('2023-11-09')
+        },
+        {
+          firstDate: new Date('2023-11-04'),
+          secondDate: new Date('2023-11-09')
+        },
+        {
+          firstDate: new Date('2023-11-06'),
+          secondDate: new Date('2023-11-11')
+        },
+        {
+          firstDate: new Date('2023-11-07'),
+          secondDate: new Date('2023-11-12')
         }
       ];
-      const testExpectedOutputs = [5, 1, 61];
+
+      const testExpectedOutputs = [5, 1, 0, 61, 3, 3, 4, 3];
 
       testDateScenarios.forEach(({ firstDate, secondDate }, index) => {
         const result = businessDayCounter.weekdaysBetweenTwoDates(
@@ -130,9 +151,24 @@ describe('BusinessDayCounter', () => {
         {
           firstDate: new Date('2013-10-07'),
           secondDate: new Date('2014-01-01')
+        },
+        {
+          firstDate: new Date('2023-12-23'),
+          secondDate: new Date('2023-12-28')
+        },
+        {
+          firstDate: new Date('2023-06-10'),
+          secondDate: new Date('2023-06-14')
         }
+        // {
+        //   firstDate: new Date('2022-12-28'),
+        //   secondDate: new Date('2023-01-03')
+        // }
       ];
-      const testExpectedOutputs = [1, 0, 59];
+      const testExpectedOutputs = [
+        1, 0, 59, 1, 1
+        // , 2
+      ];
 
       testDateScenarios.forEach(({ firstDate, secondDate }, index) => {
         const result = businessDayCounter.businessDaysBetweenTwoDatesUsingDS(

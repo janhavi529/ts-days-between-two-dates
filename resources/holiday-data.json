@@ -1,6 +1,6 @@
 [
   {
-    "type": "FixedDay",
+    "type": "AdjustedDay",
     "name": "New Year's Day",
     "month": 1,
     "date": 1

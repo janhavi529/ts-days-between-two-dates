@@ -29,12 +29,3 @@ Labour Day - Month: October, Day: Monday, Week: 1
 
 ## Special Cases
 Good Friday, Easter Saturday, Easter Sunday, Easter Monday - Changes every year (TODO: Check algorithm)
-
-
-### Class Structure
-HolidayType
-- FixedDayPublicHoliday
-- AdjustedDayPublicHoliday
-- CertainDayPublicHoliday
-
-PublicHolidays -> Contains all HolidayType days

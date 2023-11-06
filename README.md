@@ -53,3 +53,13 @@ second Monday in June every year.
 Given this data structure, the BusinessDaysBetweenTwoDates() function should be able to be
 extended to take a list of public holiday rules, rather than a list of DateTimes, and calculate the
 number of business days between two dates using those rules to define public holidays.
+
+## Solution
+
+### Class Structure
+HolidayType
+- FixedHolidayType
+- AdjustedHolidayType
+- CertainDayHolidayType
+
+PublicHolidays -> Data structure to manage all HolidayType days
