@@ -1,6 +1,6 @@
 {
   "name": "days-between-two-dates-utility",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Identify weekdays and business days between two dates.",
   "main": "dist/index.js",
   "scripts": {
