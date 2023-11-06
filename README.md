@@ -76,4 +76,10 @@ PublicHolidays -> Data structure to manage all HolidayType days
     - Unit test cases
     - Linting using ESLint
     - Code Formatting using Prettier
-- The BusinessDayCounter class has been exported and built to be used as an NPM package.
+- The BusinessDayCounter class has been built to be used as an NPM package.
+    - npm install days-between-two-dates-utility
+    - Import and instantiate BusinessDayCounter 
+    - Call functions with inputs
+        - weekdaysBetweenTwoDates(firstDate: Date, secondDate: Date)
+        - businessDaysBetweenTwoDates(firstDate: Date, secondDate: Date, publicHolidays: Date[])
+        - businessDaysBetweenTwoDatesUsingDS(firstDate: Date, secondDate: Date) (requires resources/holiday-data.json for holiday types input)

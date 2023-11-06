@@ -155,8 +155,7 @@ export default class BusinessDayCounter {
    */
   businessDaysBetweenTwoDatesUsingDS(
     firstDate: Date,
-    secondDate: Date,
-    holidayData: Array<object> = getHolidayData()
+    secondDate: Date
   ): number {
     try {
       // If secondDate is equal to or before firstDate, return 0.
@@ -165,6 +164,7 @@ export default class BusinessDayCounter {
       }
 
       // Push public holidays to the data structure.
+      const holidayData = getHolidayData();
       const publicHolidays = new PublicHolidays();
       publicHolidays.pushPublicHolidays(holidayData);
 

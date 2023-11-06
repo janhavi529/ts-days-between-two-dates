@@ -1,6 +1,6 @@
 {
-  "name": "ts-days-between-two-dates",
-  "version": "1.0.0",
+  "name": "days-between-two-dates-utility",
+  "version": "1.0.1",
   "description": "Identify weekdays and business days between two dates.",
   "main": "dist/index.js",
   "scripts": {
@@ -37,10 +37,10 @@
     "prettier": "^3.0.3",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "tsup": "^7.2.0"
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "app-root-path": "^3.1.0",
-    "typescript": "^5.2.2"
+    "app-root-path": "^3.1.0"
   }
 }
