@@ -1,4 +1,4 @@
-import { isWeekend } from '../../src/utils/date';
+import { isWeekend, isWeekendDay } from '../../src/utils/date';
 
 describe('isWeekend function', () => {
   it('should return true for weekends', () => {
@@ -21,5 +21,20 @@ describe('isWeekend function', () => {
     expect(isWeekend(wednesday)).toBeFalsy();
     expect(isWeekend(thursday)).toBeFalsy();
     expect(isWeekend(friday)).toBeFalsy();
+  });
+});
+
+describe('isWeekendDay function', () => {
+  it('should return true for weekends', () => {
+    expect(isWeekendDay(0)).toBeTruthy();
+    expect(isWeekendDay(6)).toBeTruthy();
+  });
+
+  it('should return false for weekdays', () => {
+    expect(isWeekendDay(1)).toBeFalsy();
+    expect(isWeekendDay(2)).toBeFalsy();
+    expect(isWeekendDay(3)).toBeFalsy();
+    expect(isWeekendDay(4)).toBeFalsy();
+    expect(isWeekendDay(5)).toBeFalsy();
   });
 });

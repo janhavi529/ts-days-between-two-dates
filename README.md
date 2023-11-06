@@ -1,4 +1,7 @@
 # ts-days-between-two-dates
+
+## Problem Statement
+
 Calculate weekdays and business days between two dates.
 
 --------------------------------------
@@ -63,3 +66,14 @@ HolidayType
 - CertainDayHolidayType
 
 PublicHolidays -> Data structure to manage all HolidayType days
+
+### Notes
+- The code separates each type of holiday into its own class, this gives a single responsibility to each class. New holiday types can be easily added.
+- The abstract base class HolidayType forces each derived class to implement the "isHoliday" function and enables different implementations.
+- There is a separation of concerns into different classes to promote readability, testability, reusability and makes it easy to maintain and evolve.
+- The PublicHolidays data structure behaves like a list which stores different types of holidays. Each holiday has a different type and specification (resources/holiday-data.json contains sample data).
+- The following have been added to make sure the code is "production-ready":
+    - Unit test cases
+    - Linting using ESLint
+    - Code Formatting using Prettier
+- The BusinessDayCounter class has been exported and built to be used as an NPM package.

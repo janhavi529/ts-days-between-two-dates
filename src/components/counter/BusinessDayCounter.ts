@@ -1,10 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-
-import appRootPath from 'app-root-path';
-
 import PublicHolidays from '../holiday/PublicHolidays';
 import { isWeekend, isWeekendDay } from '../../utils/date';
+import { getHolidayData } from '../../utils/holiday';
 import {
   DatesBusinessDayCounterError,
   HolidaysBusinessDayCounterError,
@@ -31,7 +27,6 @@ export default class BusinessDayCounter {
       const totalInclusiveDays =
         Math.floor(timeDifference / millisecondsPerDay) + 1;
 
-      console.log('totalInclusiveDays', totalInclusiveDays);
       // If secondDate is equal to or before firstDate or if there are no days between the two dates, return 0.
       if (secondDate <= firstDate || totalInclusiveDays <= 2) {
         return weekdays;
@@ -43,44 +38,38 @@ export default class BusinessDayCounter {
       const completeWeeks = Math.floor(totalInclusiveDays / 7);
       const remainingDays = totalInclusiveDays % 7;
 
-      // TODO: Optimise
       // For each scenario, calculate the number of weekends and excluded days.
       if (completeWeeks > 0) {
+        weekends = 2 * completeWeeks;
+
         if (remainingDays === 0) {
           if (firstDay === 6 || secondDay === 0) {
-            weekends = 2 * completeWeeks;
             excludedDays = 1;
           } else if (firstDay === 0 || secondDay === 6) {
-            weekends = 2 * completeWeeks;
             excludedDays = 0;
           } else {
-            weekends = 2 * completeWeeks;
             excludedDays = 2;
           }
         } else {
           if (firstDay === secondDay && isWeekendDay(firstDay)) {
-            weekends = 2 * completeWeeks + 1;
-            excludedDays = 0;
-          } else if (firstDay === 0 && secondDay === 6) {
-            weekends = 2 * completeWeeks + 1;
+            weekends += 1;
             excludedDays = 0;
           } else if (firstDay === 6 && secondDay === 0) {
-            weekends = 2 * completeWeeks + 2;
+            weekends += 2;
             excludedDays = 0;
           } else if (
             (firstDay === 6 && !isWeekendDay(secondDay)) ||
             (secondDay === 0 && !isWeekendDay(firstDay))
           ) {
-            weekends = 2 * completeWeeks + 2;
+            weekends += 2;
             excludedDays = 1;
           } else if (
             (firstDay === 0 && !isWeekendDay(secondDay)) ||
             (secondDay === 6 && !isWeekendDay(firstDay))
           ) {
-            weekends = 2 * completeWeeks + 1;
+            weekends += 1;
             excludedDays = 1;
           } else if (!isWeekendDay(firstDay) && !isWeekendDay(secondDay)) {
-            weekends = 2 * completeWeeks;
             excludedDays = 2;
           }
         }
@@ -166,13 +155,18 @@ export default class BusinessDayCounter {
    */
   businessDaysBetweenTwoDatesUsingDS(
     firstDate: Date,
-    secondDate: Date
+    secondDate: Date,
+    holidayData: Array<object> = getHolidayData()
   ): number {
     try {
       // If secondDate is equal to or before firstDate, return 0.
       if (secondDate <= firstDate) {
         return 0;
       }
+
+      // Push public holidays to the data structure.
+      const publicHolidays = new PublicHolidays();
+      publicHolidays.pushPublicHolidays(holidayData);
 
       // Calculate the total number of days between startDate and endDate (exclusive).
       const timeDifference = secondDate.getTime() - firstDate.getTime();
@@ -181,18 +175,6 @@ export default class BusinessDayCounter {
         Math.floor(timeDifference / millisecondsPerDay) - 1;
 
       let businessDays = 0;
-
-      // Read the holiday data from the JSON file for now. This data can be fetched from an API in the future.
-      const holidayData = JSON.parse(
-        fs.readFileSync(
-          path.join(appRootPath.toString(), 'resources', 'holiday-data.json'),
-          'utf-8'
-        )
-      );
-
-      // Push public holidays to the data structure.
-      const publicHolidays = new PublicHolidays();
-      publicHolidays.pushPublicHolidays(holidayData);
 
       // Use a loop to iterate through the days and check for weekends and holidays
       for (let i = 1; i <= totalExclusiveDays; i++) {

@@ -10,7 +10,7 @@ const isWeekend = (date: Date): boolean => {
 };
 
 /**
- * Helper function to check if a given date is a weekend (Saturday or Sunday)
+ * Helper function to check if a given day is a weekend (Saturday or Sunday)
  *
  * @param {Number} day Input day
  * @returns {Boolean} Whether it is a Saturday/Sunday
