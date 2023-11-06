@@ -1,11 +1,11 @@
-import { HolidayType } from './HolidayType';
+import HolidayType from './HolidayType';
 
 /**
  * Derived class for public holidays which are always on the same day, except when that falls on a weekend. e.g. New
 Year's Day on January 1st every year, unless that is a Saturday or Sunday, in which case the holiday
 is the next Monday.
  */
-export class AdjustedHolidayType extends HolidayType {
+export default class AdjustedHolidayType extends HolidayType {
   private month: number;
   private day: number;
 

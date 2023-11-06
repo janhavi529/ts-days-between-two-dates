@@ -1,7 +1,7 @@
 /**
  * Abstract base class for holiday types.
  */
-export abstract class HolidayType {
+export default abstract class HolidayType {
   /**
    * Enforcing that all child classes implement the "isHoliday" method.
    *

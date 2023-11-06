@@ -1,10 +1,10 @@
-import { HolidayType } from './HolidayType';
+import HolidayType from './HolidayType';
 
 /**
  * Derived class for public holidays on a certain occurrence of a certain day in a month. e.g. Queen's Birthday on the
 second Monday in June every year.
  */
-export class CertainDayHolidayType extends HolidayType {
+export default class CertainDayHolidayType extends HolidayType {
   private month: number;
   private day: number;
   private week: number;

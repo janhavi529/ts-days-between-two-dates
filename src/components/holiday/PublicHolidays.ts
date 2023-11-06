@@ -1,12 +1,12 @@
-import { AdjustedHolidayType } from './AdjustedHolidayType';
-import { CertainDayHolidayType } from './CertainDayHolidayType';
-import { FixedHolidayType } from './FixedHolidayType';
-import { HolidayType } from './HolidayType';
+import AdjustedHolidayType from './types/AdjustedHolidayType';
+import CertainDayHolidayType from './types/CertainDayHolidayType';
+import FixedHolidayType from './types/FixedHolidayType';
+import HolidayType from './types/HolidayType';
 
 /**
  * Container class for all public holidays.
  */
-export class PublicHolidays {
+export default class PublicHolidays {
   private holidays: HolidayType[] = [];
 
   /**
