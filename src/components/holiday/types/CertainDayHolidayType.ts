@@ -58,17 +58,4 @@ export default class CertainDayHolidayType extends HolidayType {
 
     return false;
   }
-
-  getDateForYear(year: number): Date {
-    const firstDayOfMonth = new Date(year, this.month - 1, 1);
-    const firstDateOfNthWeek = firstDayOfMonth.getDate() + (this.week - 1) * 7;
-
-    const currentDate = new Date(year, this.month - 1, firstDateOfNthWeek);
-
-    while (currentDate.getDay() !== this.day) {
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    return currentDate;
-  }
 }

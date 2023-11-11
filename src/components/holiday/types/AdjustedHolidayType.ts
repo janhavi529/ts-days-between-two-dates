@@ -39,16 +39,4 @@ export default class AdjustedHolidayType extends HolidayType {
 
     return false;
   }
-
-  getDateForYear(year: number): Date {
-    const date = new Date(year, this.month - 1, this.day);
-
-    if (date.getDay() === 6) {
-      return new Date(year, this.month - 1, this.day + 2);
-    } else if (date.getDay() === 0) {
-      return new Date(year, this.month - 1, this.day + 1);
-    }
-
-    return date;
-  }
 }

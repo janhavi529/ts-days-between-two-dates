@@ -32,8 +32,4 @@ export default class FixedHolidayType extends HolidayType {
     // Check if the passed in date exists as a 'FixedHolidayType' type inside the HolidayType list.
     return currMonth === this.month && currDate === this.day;
   }
-
-  getDateForYear(year: number): Date {
-    return new Date(year, this.month - 1, this.day);
-  }
 }

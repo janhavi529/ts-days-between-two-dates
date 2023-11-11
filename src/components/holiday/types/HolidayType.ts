@@ -9,6 +9,4 @@ export default abstract class HolidayType {
    * @returns {Boolean} Whether the date is a holiday
    */
   abstract isHoliday(date: Date): boolean;
-
-  abstract getDateForYear(year: number): Date;
 }
