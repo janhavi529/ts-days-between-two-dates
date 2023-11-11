@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-import appRootPath from 'app-root-path';
-
 import PublicHolidays from '../../../src/components/holiday/PublicHolidays';
 import FixedHolidayType from '../../../src/components/holiday/types/FixedHolidayType';
 import AdjustedHolidayType from '../../../src/components/holiday/types/AdjustedHolidayType';
@@ -10,11 +8,9 @@ import CertainDayHolidayType from '../../../src/components/holiday/types/Certain
 
 describe('PublicHolidays', () => {
   // Read the holiday data from the JSON file for now. This data can be fetched from an API in the future.
+  const filePath = 'resources\\holiday-data.json';
   const mockHolidays = JSON.parse(
-    fs.readFileSync(
-      path.join(appRootPath.toString(), 'resources', 'holiday-data.json'),
-      'utf-8'
-    )
+    fs.readFileSync(path.resolve(filePath), 'utf-8')
   );
 
   const publicHolidays = new PublicHolidays();

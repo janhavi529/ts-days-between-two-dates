@@ -3,7 +3,7 @@ import { getHolidayData } from '../../src/utils/holiday';
 describe('getHolidayData function', () => {
   it('should read holiday data from the JSON file', () => {
     const mockHolidayData = [
-      { date: 1, month: 1, name: "New Year's Day", type: 'AdjustedDay' },
+      { date: 1, month: 1, name: "New Year's Day", type: 'CustomFixedDay' },
       { date: 26, month: 1, name: 'Australia Day', type: 'FixedDay' },
       { date: 25, month: 4, name: 'Anzac Day', type: 'FixedDay' },
       { date: 25, month: 12, name: 'Christmas Day', type: 'FixedDay' },

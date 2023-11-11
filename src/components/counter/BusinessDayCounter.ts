@@ -119,11 +119,11 @@ export default class BusinessDayCounter {
       );
 
       let businessDays = 0;
+      const currentDate = new Date(firstDate);
 
       // Use a loop to iterate through the days and check for weekends and holidays.
-      for (let i = 1; i <= totalExclusiveDays; i++) {
-        const currentDate = new Date(firstDate);
-        currentDate.setDate(firstDate.getDate() + i);
+      for (let i = 0; i < totalExclusiveDays; i++) {
+        currentDate.setDate(currentDate.getDate() + 1);
         if (
           !isWeekend(currentDate) &&
           !holidaySet.has(currentDate.toDateString())
@@ -170,11 +170,11 @@ export default class BusinessDayCounter {
       );
 
       let businessDays = 0;
+      const currentDate = new Date(firstDate);
 
       // Use a loop to iterate through the days and check for weekends and holidays
-      for (let i = 1; i <= totalExclusiveDays; i++) {
-        const currentDate = new Date(firstDate);
-        currentDate.setDate(firstDate.getDate() + i);
+      for (let i = 0; i < totalExclusiveDays; i++) {
+        currentDate.setDate(currentDate.getDate() + 1);
 
         // If the current date is not a weekend and not a holiday, increment businessDays.
         if (!isWeekend(currentDate) && !publicHolidays.isHoliday(currentDate)) {

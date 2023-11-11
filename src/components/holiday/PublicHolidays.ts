@@ -2,6 +2,7 @@ import AdjustedHolidayType from './types/AdjustedHolidayType';
 import CertainDayHolidayType from './types/CertainDayHolidayType';
 import FixedHolidayType from './types/FixedHolidayType';
 import HolidayType from './types/HolidayType';
+import CustomFixedHolidayType from './types/NewHolidayType';
 
 /**
  * Container class for all public holidays.
@@ -30,11 +31,17 @@ export default class PublicHolidays {
 
           break;
 
-        case 'AdjustedDay':
-          this.holidays.push(
-            new AdjustedHolidayType(holiday.month, holiday.date)
-          );
+        // case 'AdjustedDay':
+        //   this.holidays.push(
+        //     new AdjustedHolidayType(holiday.month, holiday.date)
+        //   );
 
+        //   break;
+
+        case 'CustomFixedDay':
+          this.holidays.push(
+            new CustomFixedHolidayType(holiday.month, holiday.date)
+          );
           break;
 
         case 'CertainDay':
@@ -45,6 +52,27 @@ export default class PublicHolidays {
           break;
       }
     });
+  }
+
+  getPublicHolidaysForYearRange(
+    startYear: number,
+    endYear: number
+  ): Set<string> {
+    const holidaySet: Set<string> = new Set();
+
+    this.getPublicHolidays().forEach((holidayType: HolidayType) => {
+      if (startYear !== endYear) {
+        console.log('if....');
+        for (let i = startYear; i <= endYear; i++) {
+          holidaySet.add(holidayType.getDateForYear(i).toDateString());
+        }
+      } else {
+        console.log('else....');
+        holidaySet.add(holidayType.getDateForYear(startYear).toDateString());
+      }
+    });
+
+    return holidaySet;
   }
 
   /**

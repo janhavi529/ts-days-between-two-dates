@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-import appRootPath from 'app-root-path';
-
 /**
  * Helper function to get holiday JSON data.
  *
@@ -10,11 +8,9 @@ import appRootPath from 'app-root-path';
  */
 const getHolidayData = (): Array<object> => {
   // Read the holiday data from the JSON file for now. This data can be fetched from an API in the future.
+  const filePath = 'resources\\holiday-data.json';
   const holidayData = JSON.parse(
-    fs.readFileSync(
-      path.join(appRootPath.toString(), 'resources', 'holiday-data.json'),
-      'utf-8'
-    )
+    fs.readFileSync(path.resolve(filePath), 'utf-8')
   );
 
   return holidayData;
